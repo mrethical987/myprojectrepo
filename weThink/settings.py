@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+import django_heroku
+import dj_database_url
+from decouple import config
 
 
 from pathlib import Path
@@ -52,6 +55,7 @@ CKEDITOR_UPLOAD_PATH = "blog/uploads/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -134,6 +138,10 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+
 
 
 # Default primary key field type
@@ -144,3 +152,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+django_heroku.settings(locals())
