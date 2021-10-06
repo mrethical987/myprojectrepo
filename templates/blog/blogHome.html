@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog-Home{% endblock title %}
+
+
+{% block blogactive %}active{% endblock blogactive %}
+
+{% block body %}
+
+<div class="py-3 text-center">
+  <h2>ALL POSTS</h2>
+</div>
+<div class="container">
+
+  <div class="col-md-13 my-5">
+
+    {% for post in allposts %}
+
+    <div class="card mb-3" style="max-width: 1080px;">
+      <div class="row g-0">
+        
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><a href="/blog/{{post.slug}}">{{post.title}}</a></h5>
+            <p class="card-text"><div class="preview">{{post.desc | truncatechars:500 }}</div></p>
+            <div class="text-end">
+              <strong class="d-inline-block mb-2 text-end">- {{post.author}}</strong>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">{{post.timeStamp}}</small>
+            <a >(<span>{{post.views}} views</span>)</a>
+            <a href="/blog/{{post.slug}}" role="button" class="btn btn-primary">Continue reading</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+
+  </div>
+
+</div>
+
+{% endblock body %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+{% block homeactive %}active{% endblock homeactive %}
+
+{% block body %}
+{% load humanize %}
+{% load extras %}
+
+<div class="container border shadow-lg p-3 mb-5 rounded-3 my-3">
+
+    <div class="jumbotron my-2">
+        <h1 class="display-4 text-center fw-bolder">Welcome!</h1>
+        <p class="lead text-center fw-bold">Post your thoughts here and help the world see, what you see.</p>
+        <hr class="my-4">
+        <p class="text-center">Browse through our latest updates and share your thoughts </p>
+        <a class="btn btn-primary btn-lg" href="/blog" role="button">Learn more</a>
+    </div>
+
+</div>
+
+
+<section class="pt-4 pb-4">
+    <div class="container">
+        <div class="col-6">
+            <h3 class="mb-3">MOST POPULAR POSTS</h3>
+        </div>
+    </div>
+    
+    <div class="container"">
+        {% for post in allposts %}
+        <div class="my-5">
+            <div class="col">
+                <div class="card h-100">                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{post.title}}</h5>
+                        <p class="card-text">{{post.desc| truncatechars:300 }}...</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted badge bg-error text-wrap">Last updated {{post.timeStamp}}</small>
+                        <small class="text-muted badge text-wrap ">post by - {{post.author}}</small>
+                        <a class="btn btn-primary btn-lg" href="/blog/{{post.slug}}" role="button">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock body %}
