@@ -16,7 +16,6 @@ class Post(models.Model):
     desc = models.TextField(max_length=500, blank=True, null=True)
     content = RichTextUploadingField(config_name="default", blank=True, null=True)
     # content = models.TextField()
-    postimage = models.ImageField(null=True, blank=True, upload_to='postImages')
     timeStamp = models.DateTimeField(auto_now_add=True, blank=True)
     views = models.IntegerField(default=0)
     slug = models.CharField(max_length=150, null=True, blank=True)
